@@ -1,29 +1,24 @@
-// Requiring Express and CORS
 const express = require("express");
 const cors = require("cors");
-
-// Requiring Mongoose for the DB Handling
 const mongoose = require("mongoose");
-
-// Requiring Express Routes
 const register = require("./routes/register");
 const login = require("./routes/login");
+const orders = require("./routes/orders");
+const stripe = require("./routes/stripe");
 
-// Requiring Products data
 const products = require("./products");
 
-// Declaring app via express() call
 const app = express();
 
-// Getting .env secret data
 require("dotenv").config();
-
 
 app.use(express.json());
 app.use(cors());
 
 app.use("/api/register", register);
 app.use("/api/login", login);
+app.use("/api/orders", orders);
+app.use("/api/stripe", stripe);
 
 app.get("/", (req, res) => {
   res.send("Welcome our to online shop API...");
